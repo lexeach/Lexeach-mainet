@@ -493,7 +493,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h6>Token reward</h6>
               <h4 className="mb-0">
-                {tokenRewarded ? tokenRewarded : 0} (SLR)
+                {tokenRewarded ? tokenRewarded : 0} LXC
               </h4>
             </div>
           </div>
@@ -503,7 +503,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h6>Next Reward</h6>
-              <h4 className="mb-0">{nextReward ? nextReward : 0} (SLR)</h4>
+              <h4 className="mb-0">{nextReward ? nextReward : 0} LXC</h4>
             </div>
           </div>
         </div>
@@ -610,7 +610,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <h6>Frozen Balance </h6>
                   <h4 className="mb-0">
-                    {frznBalance ? frznBalance : 0} (SLR)
+                    {frznBalance ? frznBalance : 0} LXC
                   </h4>
                 </div>
               </div>
@@ -621,7 +621,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <h6>Token Balance</h6>
                   <h4 className="mb-0">
-                    {tokenBalance ? tokenBalance : 0} (SLR)
+                    {tokenBalance ? tokenBalance : 0} LXC
                   </h4>
                 </div>
               </div>
