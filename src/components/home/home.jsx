@@ -140,7 +140,7 @@ const Dashboard = () => {
       const bal = await Usdt.methods.balanceOf(accounts[0]).call();
       const usdtbal = bal / 10 ** 18;
       // console.log(bal)
-      if (1 <= usdtbal) {
+      if (150 <= usdtbal) {
         // alert("condition is ok")
         setbalanceStatus(true);
       }
@@ -334,7 +334,7 @@ const Dashboard = () => {
     // console.log("the approve REGESTRATION_FESS", REGESTRATION_FESS);
     // the approve REGESTRATION_FESS ERC20-Token-Accepting
 
-    if (REGESTRATION_FESS === "1500000000000000000") {
+    if (REGESTRATION_FESS === "150000000000000000000") {
       let USDT_ = new web3.eth.Contract(USDT.ABI, USDT.address);
       let isAllowance = await USDT_.methods
         .allowance(account, ICU.address)
