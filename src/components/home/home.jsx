@@ -291,7 +291,7 @@ const Dashboard = () => {
 
   const handleSubmit = async (event) => {
     if (!networkStatus) {
-      return alert("please connect to binance testnet network");
+      return alert("please connect to BNB network");
     }
     if (!gasSatus) {
       return alert("insufficient gas fee");
