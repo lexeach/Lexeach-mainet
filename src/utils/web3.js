@@ -484,7 +484,7 @@ module.exports = {
     ],
   },
   BEP20: {
-    address: "0x55d398326f99059fF775485246999027B3197955",
+    address: "0x072178f8229d19A3517F439bC9Ba23A29d3EB649",
     ABI: [
       { inputs: [], stateMutability: "nonpayable", type: "constructor" },
       {
