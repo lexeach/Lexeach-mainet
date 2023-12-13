@@ -145,7 +145,7 @@ const Dashboard = () => {
         setbalanceStatus(true);
       }
 
-      if (networkId === 97) {
+      if (networkId === 56) {
         setnetworkStatus(true);
       }
       if (0.002 <= parseFloat(etherValue)) {
