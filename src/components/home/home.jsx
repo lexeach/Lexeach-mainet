@@ -242,11 +242,11 @@ const Dashboard = () => {
         params: {
           type: "ERC20",
           options: {
-            address: "0x487C09FfecD0525e3D86E55deF2417542cFBDcC6",
+            address: "0x072178f8229d19A3517F439bC9Ba23A29d3EB649",
             symbol: "LXC",
             decimals: 18,
             image:
-              "https://www.pinksale.finance/static/media/pinkswap.a95de4f3.png",
+              "https://main.drzjx1kakx6ff.amplifyapp.com/static/media/logo.43931fe53d4b9d4bf938.png",
           },
         },
       });
@@ -268,15 +268,15 @@ const Dashboard = () => {
     }
 
     const chainParams = {
-      chainId: "0x61",
-      chainName: "Binance Smart Chain Testnet",
+      chainId: "56",
+      chainName: "BNB Chain",
       nativeCurrency: {
-        name: "tBNB",
-        symbol: "tBNB",
+        name: "BNB",
+        symbol: "BNB",
         decimals: 18,
       },
-      rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545"],
-      blockExplorerUrls: ["https://testnet.bscscan.com/"],
+      rpcUrls: ["https://bsc-dataseed.binance.org/"],
+      blockExplorerUrls: ["https://bscscan.com/"],
     };
 
     try {
