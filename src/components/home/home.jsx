@@ -140,7 +140,7 @@ const Dashboard = () => {
       const bal = await Usdt.methods.balanceOf(accounts[0]).call();
       const usdtbal = bal / 10 ** 18;
       // console.log(bal)
-      if (100 <= usdtbal) {
+      if (1 <= usdtbal) {
         // alert("condition is ok")
         setbalanceStatus(true);
       }
