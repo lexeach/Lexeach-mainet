@@ -268,7 +268,7 @@ const Dashboard = () => {
     }
 
     const chainParams = {
-      chainId: "56",
+      chainId: "0x56",
       chainName: "BNB Chain",
       nativeCurrency: {
         name: "BNB",
