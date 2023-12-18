@@ -140,12 +140,12 @@ const Dashboard = () => {
       const bal = await Usdt.methods.balanceOf(accounts[0]).call();
       const usdtbal = bal / 10 ** 18;
       // console.log(bal)
-      if (100 <= usdtbal) {
+      if (150 <= usdtbal) {
         // alert("condition is ok")
         setbalanceStatus(true);
       }
 
-      if (networkId === 97) {
+      if (networkId === 56) {
         setnetworkStatus(true);
       }
       if (0.002 <= parseFloat(etherValue)) {
@@ -269,7 +269,11 @@ const Dashboard = () => {
 
     const chainParams = {
       chainId: "0x38",
+<<<<<<< HEAD
       chainName: "Binance Smart Chain",
+=======
+      chainName: "BNB Chain",
+>>>>>>> 9855fc9f9812f917a09299366e8db41466c08a64
       nativeCurrency: {
         name: "BNB",
         symbol: "BNB",
@@ -291,7 +295,7 @@ const Dashboard = () => {
 
   const handleSubmit = async (event) => {
     if (!networkStatus) {
-      return alert("please connect to binance testnet network");
+      return alert("please connect to BNB network");
     }
     if (!gasSatus) {
       return alert("insufficient gas fee");
@@ -493,7 +497,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h6>Token reward</h6>
               <h4 className="mb-0">
-                {tokenRewarded ? tokenRewarded : 0} (SLR)
+                {tokenRewarded ? tokenRewarded : 0} LXC
               </h4>
             </div>
           </div>
@@ -503,7 +507,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h6>Next Reward</h6>
-              <h4 className="mb-0">{nextReward ? nextReward : 0} (SLR)</h4>
+              <h4 className="mb-0">{nextReward ? nextReward : 0} LXC</h4>
             </div>
           </div>
         </div>
@@ -610,7 +614,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <h6>Frozen Balance </h6>
                   <h4 className="mb-0">
-                    {frznBalance ? frznBalance : 0} (SLR)
+                    {frznBalance ? frznBalance : 0} LXC
                   </h4>
                 </div>
               </div>
@@ -621,7 +625,7 @@ const Dashboard = () => {
                 <div className="card-body">
                   <h6>Token Balance</h6>
                   <h4 className="mb-0">
-                    {tokenBalance ? tokenBalance : 0} (SLR)
+                    {tokenBalance ? tokenBalance : 0} LXC
                   </h4>
                 </div>
               </div>
