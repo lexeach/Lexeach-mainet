@@ -160,7 +160,7 @@ const Dashboard = () => {
       let frozenBalance = await BEP20_.methods
         ._frozenBalance(accounts[0])
         .call();
-      let RegistrationFee = await ICU_.methods.getRegistrationFess().call();
+      let RegistrationFee = await ICU_.methods.REGESTRATION_FESS().call();
       let currentId = await ICU_.methods.currUserID().call();
       let REGESTRATION_FESS = await ICU_.methods.REGESTRATION_FESS().call();
       let token_rewared = await ICU_.methods.tokenReward().call();
@@ -242,11 +242,11 @@ const Dashboard = () => {
         params: {
           type: "ERC20",
           options: {
-            address: "0x072178f8229d19A3517F439bC9Ba23A29d3EB649",
+            address: "0x9fffbf4ad02269cd7a34e0ce7cdd5576c4a663e7",
             symbol: "LXC",
             decimals: 18,
             image:
-              "https://main.drzjx1kakx6ff.amplifyapp.com/static/media/logo.43931fe53d4b9d4bf938.png",
+              "https://www.pinksale.finance/static/media/pinkswap.a95de4f3.png",
           },
         },
       });
@@ -268,14 +268,14 @@ const Dashboard = () => {
     }
 
     const chainParams = {
-      chainId: "56",
-      chainName: "BNB Chain",
+      chainId: "0x38",
+      chainName: "Binance Smart Chain",
       nativeCurrency: {
         name: "BNB",
         symbol: "BNB",
         decimals: 18,
       },
-      rpcUrls: ["https://bsc-dataseed.binance.org/"],
+      rpcUrls: ["https://bsc-dataseed1.binance.org"],
       blockExplorerUrls: ["https://bscscan.com/"],
     };
 

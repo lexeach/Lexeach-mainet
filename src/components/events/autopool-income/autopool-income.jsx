@@ -4,7 +4,12 @@ import "./autopool-income.css";
 // import Moralis from "moralis";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/common-evm-utils"; // Import EvmChain from the correct package
+// require("dotenv").config();
+// import dotenv from "dotenv";
+// dotenv.config(); // Load environment variables
+const ENV = "./../../../../data.js";
 
+// console.log("apiKey: process.env.binanceKey", process.env.binanceKey);
 function AutoPoolIncome({ ...props }) {
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilters] = useState("all");
@@ -17,11 +22,10 @@ function AutoPoolIncome({ ...props }) {
     const runApp = async () => {
       if (!Moralis.Core.isStarted)
         await Moralis.start({
-          apiKey:
-            "khlUdKYkvJvA9Ruj0n0Ire7Foax3m7LY7g0inZbSqzZC8rttoDgxAqtggzGah91U",
+          apiKey: ENV.binanceKey,
         });
-      const address = "0x7716dB181506939Ed6Ba6e35755A8668D8668D9A"; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = EvmChain.BSC_TESTNET;
+      const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
+      const chain = ENV.chainName;
       const topic =
         "0xbd53f67cfad1b161e1857c840f0f3430a080b8cf8b77f4183d4302c5daed15b4";
       const abi = {
@@ -83,8 +87,7 @@ function AutoPoolIncome({ ...props }) {
   }, [props.account]);
 
   const handleLinkClick = (url) => {
-    let baseUrl = "https://testnet.bscscan.com/tx/";
-    window.open(baseUrl + url, "_blank");
+    window.open(ENV.baseUrl + url, "_blank");
   };
 
   const filteredTransactions =
