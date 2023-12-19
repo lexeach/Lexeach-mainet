@@ -163,7 +163,7 @@ const Dashboard = () => {
       let RegistrationFee = await ICU_.methods.REGESTRATION_FESS().call();
       let currentId = await ICU_.methods.currUserID().call();
       let REGESTRATION_FESS = await ICU_.methods.REGESTRATION_FESS().call();
-      let token_rewared = await ICU_.methods.tokenReward().call();
+      let token_rewared = await ICU_.methods.total_RBCD().call();
       let pay_auto_pool = await ICU_.methods.Autopool_Level_Income().call();
       let level_income = await ICU_.methods.level_income().call();
       let tokenPriceIs = await ICU_.methods.tokenPrice().call();
