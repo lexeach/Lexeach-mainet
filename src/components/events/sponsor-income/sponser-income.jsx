@@ -4,8 +4,9 @@ import Moralis from "moralis";
 // require("dotenv").config();
 // import dotenv from "dotenv";
 // dotenv.config(); // Load environment variables
-const ENV = "./../../../../data.js";
+const ENV = require("./../../../utils/data");
 function SponserIncome({ ...props }) {
+  console.log("Called Sponsor income Components");
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
     const runApp = async () => {
@@ -14,7 +15,7 @@ function SponserIncome({ ...props }) {
           apiKey: ENV.binanceKey,
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = ENV.chainName;
+      const chain = ENV.chainID;
       const topic =
         "0x23b5ce99046ef19224b4cbceac4f2c894c141e5e60c2e62e7f3edff030f85645";
       const abi = {

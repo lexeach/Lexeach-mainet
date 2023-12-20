@@ -3,7 +3,7 @@ import "./send-balance.css";
 import Moralis from "moralis";
 // import dotenv from "dotenv";
 // dotenv.config(); // Load environment variables
-const ENV = "./../../../../data.js";
+const ENV = require("./../../../utils/data");
 // require("dotenv").config();
 function SendBalance({ ...props }) {
   const [transactions, setTransactions] = useState([]);
@@ -16,7 +16,7 @@ function SendBalance({ ...props }) {
           apiKey: ENV.binanceKey,
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = ENV.chainName;
+      const chain = ENV.chainID;
       const topic =
         "0x85564825e768c97dfb9dc0b3f8c205b076e86cd7637219b43f6ba7a748f6dbb9";
       const abi = {

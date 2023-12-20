@@ -7,7 +7,7 @@ import { EvmChain } from "@moralisweb3/common-evm-utils"; // Import EvmChain fro
 // require("dotenv").config();
 // import dotenv from "dotenv";
 // dotenv.config(); // Load environment variables
-const ENV = "./../../../../data.js";
+const ENV = require("./../../../utils/data");
 
 // console.log("apiKey: process.env.binanceKey", process.env.binanceKey);
 function AutoPoolIncome({ ...props }) {
@@ -25,7 +25,8 @@ function AutoPoolIncome({ ...props }) {
           apiKey: ENV.binanceKey,
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = ENV.chainName;
+      const chain = ENV.chainID;
+      console.log("Cahin is : ", chain);
       const topic =
         "0xbd53f67cfad1b161e1857c840f0f3430a080b8cf8b77f4183d4302c5daed15b4";
       const abi = {
@@ -60,6 +61,7 @@ function AutoPoolIncome({ ...props }) {
         type: "event",
       };
       let limit = 10000;
+      console.log("Address is :", address);
       const response = await Moralis.EvmApi.events.getContractEvents({
         address,
         chain,
@@ -89,12 +91,13 @@ function AutoPoolIncome({ ...props }) {
   const handleLinkClick = (url) => {
     window.open(ENV.baseUrl + url, "_blank");
   };
-
+  console.log("Auto Pool is called and props is ", props);
   const filteredTransactions =
     filter === "all"
       ? transactions.filter(
           (transaction) =>
-            transaction.referrer.toLowerCase() === props.account.toLowerCase()
+            transaction.referrer.toLowerCase() ===
+            props.account.toLocaleLowerCase() // props.account.toLowerCase()
         )
       : transactions.filter(
           (transaction) =>

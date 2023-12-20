@@ -5,7 +5,7 @@ import Moralis from "moralis";
 // require("dotenv").config();
 // import dotenv from "dotenv";
 // dotenv.config(); // Load environment variables
-const ENV = "./../../../../data.js";
+const ENV = require("./../../../utils/data");
 function LevelIncome({ ...props }) {
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilters] = useState("all");
@@ -20,7 +20,7 @@ function LevelIncome({ ...props }) {
           apiKey: ENV.binanceKey,
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = ENV.chainName;
+      const chain = ENV.chainID;
       const topic =
         "0xb419cb7206d6f312a5672c9797e2bcd7a683773ef37c3475832ef48428297e11";
       const abi = {

@@ -5,7 +5,7 @@ import Moralis from "moralis";
 // require("dotenv").config();
 // import dotenv from "dotenv";
 // dotenv.config(); // Load environment variables
-const ENV = "./../../../../data.js";
+const ENV = require("./../../../utils/data");
 function LuckyDrawWin({ ...props }) {
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
@@ -15,7 +15,7 @@ function LuckyDrawWin({ ...props }) {
           apiKey: ENV.binanceKey,
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
-      const chain = ENV.chainName;
+      const chain = ENV.chainID;
       const topic =
         "0xece26849988d1627dd651a357d99c795fa504210f5186090234f2930bf0215ce";
       const abi = {

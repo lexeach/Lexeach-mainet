@@ -129,7 +129,6 @@ const Dashboard = () => {
   useEffect(() => {
     async function load() {
       const accounts = await web3.eth.requestAccounts();
-      console.log("Accounts Called: ", accounts);
       if (!accounts) {
         alert("please install metamask");
       }
@@ -154,6 +153,8 @@ const Dashboard = () => {
 
       setBalance(roundToFour(etherValue));
       setAccount(accounts[0]);
+      // setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
+
       let BEP20_ = new web3.eth.Contract(BEP20.ABI, BEP20.address);
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
 
@@ -163,7 +164,7 @@ const Dashboard = () => {
       let RegistrationFee = await ICU_.methods.REGESTRATION_FESS().call();
       let currentId = await ICU_.methods.currUserID().call();
       let REGESTRATION_FESS = await ICU_.methods.REGESTRATION_FESS().call();
-      let token_rewared = await ICU_.methods.total_rbcd().call();
+      let token_rewared = await ICU_.methods.tokenReward().call();
       let pay_auto_pool = await ICU_.methods.Autopool_Level_Income().call();
       let level_income = await ICU_.methods.level_income().call();
       let tokenPriceIs = await ICU_.methods.tokenPrice().call();
