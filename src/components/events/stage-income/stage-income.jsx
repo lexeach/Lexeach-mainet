@@ -56,16 +56,17 @@ function StageIncome({ ...props }) {
         topic,
         abi,
       });
+      console.log(" response.toJSON().result:", response.toJSON().result);
       let datas = response.toJSON().result.map((transaction) => ({
         user: transaction.data._user,
-        referrer: transaction.data._referral,
+        referrer: transaction.data._partner,
         date: new Date(transaction.data._time * 1000)
           .toISOString()
           .split("T")[0], // Adjust the format as needed
         time: new Date(transaction.data._time * 1000)
           .toTimeString()
           .split(" ")[0],
-        level: transaction.data._level,
+        level: transaction.data._stage,
         transactionHash: transaction.transaction_hash,
       }));
       setTransactions(datas);
@@ -88,6 +89,7 @@ function StageIncome({ ...props }) {
             transaction.user === props.account.toLowerCase() &&
             transaction.level == filter
         );
+  console.log("Filter Transaction:", filteredTransactions);
   return (
     <div className="PoolIncome-Stage">
       <h1>Transaction History Of Stage Income</h1>

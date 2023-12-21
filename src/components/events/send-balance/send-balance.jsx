@@ -18,7 +18,7 @@ function SendBalance({ ...props }) {
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
       const chain = ENV.chainID;
       const topic =
-        "0x85564825e768c97dfb9dc0b3f8c205b076e86cd7637219b43f6ba7a748f6dbb9";
+        "0xa7eecec694b4144f4c7de3d21418bc45bd631e03acf0edd749a32d6a96e1f66a";
       const abi = {
         anonymous: false,
         inputs: [
@@ -52,8 +52,9 @@ function SendBalance({ ...props }) {
         topic,
         abi,
       });
+      console.log("event Response ", response.toJSON().result);
       let datas = response.toJSON().result.map((transaction) => ({
-        referrer: transaction.data.referer,
+        referrer: transaction.data._partner,
         amount: parseFloat(
           props.web3.utils.fromWei(transaction.data.amount, "ether")
         ).toFixed(4),
@@ -67,10 +68,12 @@ function SendBalance({ ...props }) {
           transaction.referrer ==
             (props.account ? props.account.toLowerCase() : props.account)
       );
+      console.log("Data of transaction: ", filteredTransactions);
       setTransactions(filteredTransactions);
     };
     runApp();
   }, [props.account]);
+
   console.log("Props account :", props.account);
   const handleLinkClick = (url) => {
     window.open(ENV.baseUrl + url, "_blank");
