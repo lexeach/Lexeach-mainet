@@ -84,39 +84,40 @@ function SponserIncome({ ...props }) {
   return (
     <div className="PoolIncome-Sponsor">
       <h1>Transaction History Of Sponsor Income</h1>
-
-      <div>
-        <label>Filter by Referrer:</label>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>User</th>
-            <th>Time</th>
-            <th>Identity</th>
-            <th>Transaction Hash</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTransactions.map((transaction) => (
-            <tr key={transaction.user}>
-              <td>{transaction.user}</td>
-              <td>
-                {transaction.date} <br /> {transaction.time}
-              </td>
-              <td>{transaction.identity}</td>
-              <td className="scrollable-column">
-                <a
-                  onClick={() => handleLinkClick(transaction.transactionHash)}
-                  className="transaction-link"
-                >
-                  {transaction.transactionHash}
-                </a>
-              </td>
+      <div className="table-container">
+        <div>
+          <label>Filter by Referrer:</label>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Time</th>
+              <th>Identity</th>
+              <th>Transaction Hash</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredTransactions.map((transaction) => (
+              <tr key={transaction.user}>
+                <td>{transaction.user}</td>
+                <td>
+                  {transaction.date} <br /> {transaction.time}
+                </td>
+                <td>{transaction.identity}</td>
+                <td className="scrollable-column">
+                  <a
+                    onClick={() => handleLinkClick(transaction.transactionHash)}
+                    className="transaction-link"
+                  >
+                    {transaction.transactionHash}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -13,8 +13,8 @@
   color: #08f074;
 }
 
-.PoolIncome-luckyDraw table-container {
-  flex: 1;
+.PoolIncome-luckyDraw .table-container {
+  flex: 1; /* Allow the table container to grow and fill the remaining space */
   overflow-y: auto;
 }
 

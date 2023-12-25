@@ -1,4 +1,4 @@
-.PoolIncome-autopool {
+.PoolIncome-autopool  {
   padding: 20px;
   background-color: #325eee;
   display: flex;
@@ -7,39 +7,24 @@
   overflow: hidden;
 }
 
-.PoolIncome-autopool h1 {
+.PoolIncome-autopool  h1 {
   font-size: 34px;
   margin-bottom: 20px;
   color: #08f074;
 }
 
-.PoolIncome-autopool label {
-  display: block;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.PoolIncome-autopool select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  background-color: #1e2da1;
-  color: #ffffff;
-}
-
-.PoolIncome-autopool table-container {
-  flex: 1;
+.PoolIncome-autopool  .table-container {
+  flex: 1; /* Allow the table container to grow and fill the remaining space */
   overflow-y: auto;
 }
 
-.PoolIncome-autopool table {
+.PoolIncome-autopool  table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.PoolIncome-autopool th {
+.PoolIncome-autopool  th {
   background-color: #394465;
   color: #ffffff;
   font-weight: bold;
@@ -47,15 +32,13 @@
   text-align: left;
 }
 
-.PoolIncome-autopool td {
+.PoolIncome-autopool  td {
   background-color: #1e2da1;
   color: #ffffff;
   padding: 10px;
-  white-space: nowrap; /* Prevent line breaks within the <td> */
-
 }
 
-.PoolIncome-autopool .scrollable-column {
+.PoolIncome-autopool  .scrollable-column {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

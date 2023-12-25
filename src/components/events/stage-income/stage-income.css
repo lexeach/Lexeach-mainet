@@ -1,3 +1,5 @@
+
+
 .PoolIncome-Stage {
   padding: 20px;
   background-color: #7f0ae5;
@@ -13,23 +15,8 @@
   color: #08f074;
 }
 
-.PoolIncome-Stage label {
-  display: block;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.PoolIncome-Stage select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ffffff;
-  border-radius: 5px;
-  background-color: #1e2da1;
-  color: #ffffff;
-}
-
-.PoolIncome-Stage table-container {
-  flex: 1;
+.PoolIncome-Stage .table-container {
+  flex: 1; /* Allow the table container to grow and fill the remaining space */
   overflow-y: auto;
 }
 
@@ -51,8 +38,6 @@
   background-color: #1e2da1;
   color: #ffffff;
   padding: 10px;
-  white-space: nowrap; /* Prevent line breaks within the <td> */
-
 }
 
 .PoolIncome-Stage .scrollable-column {
