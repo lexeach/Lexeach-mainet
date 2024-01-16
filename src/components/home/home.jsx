@@ -334,6 +334,10 @@ const Dashboard = () => {
     } else {
       coRefId = coreferrerID;
     }
+
+    if (referrerID =1) {
+      coRefId = id;
+    }
     // console.log("the approve REGESTRATION_FESS", REGESTRATION_FESS);
     // the approve REGESTRATION_FESS ERC20-Token-Accepting
 
