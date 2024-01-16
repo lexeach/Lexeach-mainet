@@ -103,8 +103,8 @@ function DrawerAppBar(props) {
     async function load() {
       const accounts = await web3.eth.requestAccounts();
       // console.log("accounts", accounts);
-      // setAccount(accounts[0]);
-      setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
+      setAccount(accounts[0]);
+      //setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
     }
     load();
   }, []);
