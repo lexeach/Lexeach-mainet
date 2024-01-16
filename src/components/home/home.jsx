@@ -335,7 +335,7 @@ const Dashboard = () => {
       coRefId = coreferrerID;
     }
 
-    if (referrerID =1) {
+    if (id =1) {
       coRefId = id;
     }
     // console.log("the approve REGESTRATION_FESS", REGESTRATION_FESS);
