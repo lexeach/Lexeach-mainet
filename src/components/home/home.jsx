@@ -84,7 +84,7 @@ const Dashboard = () => {
       // setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
 
       let EXAM_CONTREC = new web3.eth.Contract(EXAM.ABI, EXAM.address);
-      let subAdmin = await EXAM_CONTREC.methods.isQualified(account[0]).call();
+      let subAdmin = await EXAM_CONTREC.methods.isPass(account[0]).call();
       setExSubAdmin(subAdmin);
 
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
@@ -327,7 +327,7 @@ const Dashboard = () => {
     // console.log("ref_user_detail", ref_user_detail);
     const { referredUsers, coreferrerID } = ref_user_detail;
 
-    let subAdmin = await EXAM_CONTREC.methods.isQualified(ref_user_acc).call();
+    let subAdmin = await EXAM_CONTREC.methods.isPass(ref_user_acc).call();
     // console.log("sub admin", subAdmin);
     if (subAdmin && parseInt(referredUsers) > 2) {
       coRefId = id;
