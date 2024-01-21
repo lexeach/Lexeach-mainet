@@ -831,7 +831,7 @@ const Dashboard = () => {
       )}
 
       {/* Registration section  */}
-      {udIsExist ? (
+      {isExist ? (
         ""
       ) : (
         <>
