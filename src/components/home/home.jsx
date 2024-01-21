@@ -105,6 +105,7 @@ const Dashboard = () => {
         referrerID,
         stageIncomeReceived,
       } = userDetail;
+      console.log("***** userDetail ***", userDetail, isExist)
       setUdAutoPoolPayReceived(autoPoolPayReceived);
       setUdCoreferredUsers(coreferredUsers);
       setUdCoreferrerID(coreferrerID);
