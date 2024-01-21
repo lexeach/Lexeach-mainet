@@ -32,6 +32,7 @@ const Dashboard = () => {
   const [networkStatus, setnetworkStatus] = useState(false);
   const [gasSatus, setgasSatus] = useState(false);
   const [balanceStatus, setbalanceStatus] = useState(false);
+  const [partnerId, setPartnerId] = useState();
 
   // const [referrerID, setReferrerID] = useState({ id: "", coref: "" });
   const [referrerID, setReferrerID] = useState({ id: "" });
@@ -39,6 +40,7 @@ const Dashboard = () => {
   const [tokenReword, setTokenReword] = useState({ amount: "" });
   const [regFess, setRegFess] = useState({ amount: "" });
   const [tkAcc, settkAcc] = useState(null);
+  const [amount, setAmount] = useState();
 
   // set it latter
   const [tokenPrice, setTokenPrice] = useState();
@@ -79,12 +81,12 @@ const Dashboard = () => {
   // user Details
   useEffect(() => {
     async function user_detail() {
-      const account = await web3.eth.requestAccounts();
-      //let account = ["0x420Ff3f53b86A2A7e08B3fe603890a31F1277696"];
+      // const account = await web3.eth.requestAccounts();
+      let account = ["0x420Ff3f53b86A2A7e08B3fe603890a31F1277696"];
       // setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
 
       let EXAM_CONTREC = new web3.eth.Contract(EXAM.ABI, EXAM.address);
-      let subAdmin = await EXAM_CONTREC.methods.isPass(account[0]).call();
+      let subAdmin = await EXAM_CONTREC.methods.isQualified(account[0]).call();
       setExSubAdmin(subAdmin);
 
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
@@ -154,8 +156,8 @@ const Dashboard = () => {
       }
 
       setBalance(roundToFour(etherValue));
-      setAccount(accounts[0]);
-      //setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
+      // setAccount(accounts[0]);
+      setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
 
       let BEP20_ = new web3.eth.Contract(BEP20.ABI, BEP20.address);
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
@@ -171,10 +173,8 @@ const Dashboard = () => {
       let level_income = await ICU_.methods.level_income().call();
       let tokenPriceIs = await ICU_.methods.tokenPrice().call();
       let getNextReward = await ICU_.methods.getNextReward().call();
-      // console.log("level income", level_income, getNextReward, tokenPriceIs);
-
-      // const etherValue = Web3.utils.fromWei('1000000000000000000', 'ether');
-
+      let partnerIds = await ICU_.methods.partnerID(accounts[0]).call();
+      setPartnerId(partnerIds);
       const convert_pay_auto_pool = web3.utils.fromWei(pay_auto_pool, "ether");
 
       const frozenBalance_convert = web3.utils.fromWei(frozenBalance, "ether");
@@ -221,6 +221,10 @@ const Dashboard = () => {
   const handleChangeIdentify = (event) => {
     let { name, value } = event.target;
     setidentify(value);
+  };
+  const handleChangeAmount = (event) => {
+    let { amount, value } = event.target;
+    setAmount(value);
   };
 
   const handleChangeTkReword = (event) => {
@@ -327,16 +331,12 @@ const Dashboard = () => {
     // console.log("ref_user_detail", ref_user_detail);
     const { referredUsers, coreferrerID } = ref_user_detail;
 
-    let subAdmin = await EXAM_CONTREC.methods.isPass(ref_user_acc).call();
+    let subAdmin = await EXAM_CONTREC.methods.isQualified(ref_user_acc).call();
     // console.log("sub admin", subAdmin);
     if (subAdmin && parseInt(referredUsers) > 2) {
       coRefId = id;
     } else {
       coRefId = coreferrerID;
-    }
-
-    if (id =1) {
-      coRefId = id;
     }
     // console.log("the approve REGESTRATION_FESS", REGESTRATION_FESS);
     // the approve REGESTRATION_FESS ERC20-Token-Accepting
@@ -405,6 +405,53 @@ const Dashboard = () => {
           setIsModalOpen(false);
         }
       }
+    }
+  };
+
+  const handleSubmitPayPartner = async (event) => {
+    if (!networkStatus) {
+      return alert("please connect to binance testnet network");
+    }
+    if (!gasSatus) {
+      return alert("insufficient gas fee");
+    }
+    if (!balanceStatus) {
+      return alert("insufficient usdt fund");
+    }
+
+    event.preventDefault();
+    setLoader(true);
+    setIsModalOpen(true);
+    let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
+
+    let USDT_ = new web3.eth.Contract(USDT.ABI, USDT.address);
+    let isApprove, reg_user;
+    console.log("iss alloweance");
+    console.log("From Account: ", account);
+    isApprove = await USDT_.methods
+      .approve(ICU.address, amount)
+      .send({ from: account })
+      .on("error", console.error);
+
+    reg_user = await ICU_.methods
+      .payPartnerFee(amount)
+      .send({ from: account })
+      .on("error", (err) => {
+        console.log("the error in reg", err);
+        setLoader(false);
+        setIsModalOpen(false);
+      });
+    console.log("reg_user", reg_user);
+
+    console.log("****** native coin accepting condtion", reg_user);
+    if (reg_user.status) {
+      setLoader(false);
+      setIsModalOpen(false);
+      alert("Registerd Success");
+    } else {
+      alert("Registerd Failed !!!!");
+      setLoader(false);
+      setIsModalOpen(false);
     }
   };
 
@@ -890,6 +937,54 @@ const Dashboard = () => {
               ) : (
                 ""
               )}
+            </div>
+          </div>
+          <div> </div>
+        </>
+      )}
+      {!exSubAdmin || partnerId == 0 ? (
+        ""
+      ) : (
+        <>
+          <div className="row private-section-bg">
+            <div className="col-sm-12 grid-margin">
+              <div className="card">
+                <div className="card-body text-center">
+                  <h5>Pay Partner Fee</h5>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-12 grid-margin">
+              <div className="card">
+                <div className="card-body">
+                  <div className="row">
+                    <div className="col-sm-12 my-auto">
+                      <form
+                        className="forms-sample"
+                        onSubmit={handleSubmitPayPartner}
+                      >
+                        <div className="form-group w-100">
+                          <input
+                            className="form-control mt-2"
+                            type="string"
+                            required
+                            name="identify"
+                            onChange={handleChangeAmount}
+                            value={amount}
+                            placeholder="Amount Fee"
+                          />
+
+                          <input
+                            className="btn btn-primary mt-3"
+                            type="submit"
+                            value="Submit"
+                          />
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div> </div>
