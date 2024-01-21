@@ -567,7 +567,7 @@ const Dashboard = () => {
           <div className="card">
             <div className="card-body">
               <h6>Is Exist</h6>
-              <h4 className="mb-0">{udIsExist ? "YES" : "NO"}</h4>
+              <h4 className="mb-0">{isExist ? "YES" : "NO"}</h4>
             </div>
           </div>
         </div>
@@ -640,7 +640,7 @@ const Dashboard = () => {
           ""
         )}
       </div>
-      {udIsExist ? (
+      {isExist ? (
         <>
           <div
             className={`row  ${
