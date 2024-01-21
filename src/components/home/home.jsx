@@ -70,7 +70,7 @@ const Dashboard = () => {
   const [udCoreferrerID, setUdCoreferrerID] = useState();
   const [udId, setUdId] = useState();
   const [udIncome, setUdIncome] = useState();
-  const [udIsExist, setUdIsExist] = useState();
+  const [isExist, setIsExist] = useState();
   const [udLevelIncomeReceived, setUdLevelIncomeReceived] = useState();
   const [udMissedPoolPayment, setUdMmissedPoolPayment] = useState();
   const [udReferredUsers, setUdReferredUsers] = useState();
