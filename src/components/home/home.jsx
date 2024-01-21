@@ -111,7 +111,7 @@ const Dashboard = () => {
       setUdCoreferrerID(coreferrerID);
       setUdId(id);
       setUdIncome(income);
-      setUdIsExist(isExist);
+      setIsExist(isExist);
       setUdLevelIncomeReceived(levelIncomeReceived);
       setUdMmissedPoolPayment(missedPoolPayment);
       setUdReferredUsers(referredUsers);
