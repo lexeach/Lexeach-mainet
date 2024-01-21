@@ -81,9 +81,9 @@ const Dashboard = () => {
   // user Details
   useEffect(() => {
     async function user_detail() {
-      // const account = await web3.eth.requestAccounts();
-      let account = ["0x420Ff3f53b86A2A7e08B3fe603890a31F1277696"];
-      // setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
+      const account = await web3.eth.requestAccounts();
+      //let account = ["0x420Ff3f53b86A2A7e08B3fe603890a31F1277696"];
+      setAccount(account[0]);
 
       let EXAM_CONTREC = new web3.eth.Contract(EXAM.ABI, EXAM.address);
       let subAdmin = await EXAM_CONTREC.methods.isQualified(account[0]).call();
