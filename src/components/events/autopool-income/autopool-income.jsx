@@ -9,7 +9,6 @@ import { EvmChain } from "@moralisweb3/common-evm-utils"; // Import EvmChain fro
 // dotenv.config(); // Load environment variables
 const ENV = require("./../../../utils/data");
 
-// console.log("apiKey: process.env.binanceKey", process.env.binanceKey);
 function AutoPoolIncome({ ...props }) {
   const [transactions, setTransactions] = useState([]);
   const [filter, setFilters] = useState("all");
