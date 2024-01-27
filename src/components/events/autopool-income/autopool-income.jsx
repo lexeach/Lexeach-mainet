@@ -25,7 +25,6 @@ function AutoPoolIncome({ ...props }) {
         });
       const address = ENV.contractAddress; //"0xe184a68428072f0102f073a098af8ee7705519dc";
       const chain = ENV.chainID;
-      console.log("Cahin is : ", chain);
       const topic =
         "0xbd53f67cfad1b161e1857c840f0f3430a080b8cf8b77f4183d4302c5daed15b4";
       const abi = {
@@ -68,6 +67,8 @@ function AutoPoolIncome({ ...props }) {
         topic,
         abi,
       });
+      console.log("Event Response: ", response);
+      
       let datas = response.toJSON().result.map((transaction) => ({
         user: transaction.data.sender,
         referrer: transaction.data.referrer,

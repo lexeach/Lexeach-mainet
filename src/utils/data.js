@@ -3,7 +3,7 @@ module.exports = {
     "khlUdKYkvJvA9Ruj0n0Ire7Foax3m7LY7g0inZbSqzZC8rttoDgxAqtggzGah91U",
   chainID: "0x61",
   chainName: "EvmChain.BSC_TESTNET",
-  contractAddress: "0xEb0aF9dE897019019191Ae51e47A99803651268c",
+  contractAddress: "0x4aA381A4e977F2680D3344C7974d40450203081f",
   baseUrl: "https://testnet.bscscan.com/tx/",
 
   // Below is for mainnet:

@@ -33,6 +33,7 @@ const Dashboard = () => {
   const [gasSatus, setgasSatus] = useState(false);
   const [balanceStatus, setbalanceStatus] = useState(false);
   const [partnerId, setPartnerId] = useState();
+  const [incomeMissed, setIncomeMissed] = useState();
 
   // const [referrerID, setReferrerID] = useState({ id: "", coref: "" });
   const [referrerID, setReferrerID] = useState({ id: "" });
@@ -86,11 +87,12 @@ const Dashboard = () => {
       setAccount(account[0]);
 
       let EXAM_CONTREC = new web3.eth.Contract(EXAM.ABI, EXAM.address);
-      let subAdmin = await EXAM_CONTREC.methods.isQualified(account[0]).call();
+      let subAdmin = await EXAM_CONTREC.methods.isPass(account[0]).call(); //
       setExSubAdmin(subAdmin);
 
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
-      let userDetail = await ICU_.methods.users(account[0]).call();
+      console.log("ICO address is :", ICU);
+      let userDetail = await ICU_.methods.users(account[0]).call(); //account[0] "0xb8D4217B314192857a2Ba34F413008F4EAdfd0f0"
       let {
         autoPoolPayReceived,
         autopoolPayReciever,
@@ -104,19 +106,22 @@ const Dashboard = () => {
         referredUsers,
         referrerID,
         stageIncomeReceived,
+        incomeMissed,
       } = userDetail;
-      console.log("***** userDetail ***", userDetail, isExist)
+
+      console.log("***** userDetail ***", userDetail, isExist);
       setUdAutoPoolPayReceived(autoPoolPayReceived);
       setUdCoreferredUsers(coreferredUsers);
       setUdCoreferrerID(coreferrerID);
       setUdId(id);
-      setUdIncome(income);
+      setUdIncome(Number(await web3.utils.fromWei(income, "ether")).toFixed(4));
       setIsExist(isExist);
       setUdLevelIncomeReceived(levelIncomeReceived);
       setUdMmissedPoolPayment(missedPoolPayment);
       setUdReferredUsers(referredUsers);
       setUdReferrerID(referrerID);
       setUdStageIncomeReceived(stageIncomeReceived);
+      setIncomeMissed(incomeMissed);
       let payReciverUserD = await ICU_.methods
         .users(autopoolPayReciever)
         .call();
@@ -157,8 +162,8 @@ const Dashboard = () => {
       }
 
       setBalance(roundToFour(etherValue));
-      // setAccount(accounts[0]);
-      setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
+      setAccount(accounts[0]);
+      // setAccount("0x420Ff3f53b86A2A7e08B3fe603890a31F1277696");
 
       let BEP20_ = new web3.eth.Contract(BEP20.ABI, BEP20.address);
       let ICU_ = new web3.eth.Contract(ICU.ABI, ICU.address);
@@ -175,6 +180,8 @@ const Dashboard = () => {
       let tokenPriceIs = await ICU_.methods.tokenPrice().call();
       let getNextReward = await ICU_.methods.getNextReward().call();
       let partnerIds = await ICU_.methods.partnerID(accounts[0]).call();
+      let patnerFee = await ICU_.methods.partnerFee().call();
+      setAmount(patnerFee);
       setPartnerId(partnerIds);
       const convert_pay_auto_pool = web3.utils.fromWei(pay_auto_pool, "ether");
 
@@ -187,7 +194,9 @@ const Dashboard = () => {
       setCurrentId(currentId);
       setREGESTRATION_FESS(REGESTRATION_FESS);
 
-      const token_rewared_convert = web3.utils.fromWei(token_rewared, "ether");
+      const token_rewared_convert = Number(
+        web3.utils.fromWei(token_rewared, "ether")
+      ).toFixed(6);
       setTokenRewarded(roundToFour(token_rewared_convert));
       setPayAutoPool(roundToFour(convert_pay_auto_pool));
 
@@ -201,7 +210,9 @@ const Dashboard = () => {
       setTokenBalance(roundToFour(convert_tokenBal));
 
       // Set Token PRice and Next Level Reward
-      const tokenPriceIs_convert = web3.utils.fromWei(tokenPriceIs, "ether");
+      const tokenPriceIs_convert = Number(
+        web3.utils.fromWei(tokenPriceIs, "ether")
+      ).toFixed(6);
       const getNextReward_convert = web3.utils.fromWei(getNextReward, "ether");
 
       setTokenPrice(tokenPriceIs_convert);
@@ -223,10 +234,10 @@ const Dashboard = () => {
     let { name, value } = event.target;
     setidentify(value);
   };
-  const handleChangeAmount = (event) => {
-    let { amount, value } = event.target;
-    setAmount(value);
-  };
+  // const handleChangeAmount = (event) => {
+  //   let { amount, value } = event.target;
+  //   setAmount(value);
+  // };
 
   const handleChangeTkReword = (event) => {
     let { name, value } = event.target;
@@ -337,7 +348,11 @@ const Dashboard = () => {
     if (subAdmin && parseInt(referredUsers) > 2) {
       coRefId = id;
     } else {
-      coRefId = coreferrerID;
+      if (id == 1) {
+        coRefId = 1;
+      } else {
+        coRefId = coreferrerID;
+      }
     }
     // console.log("the approve REGESTRATION_FESS", REGESTRATION_FESS);
     // the approve REGESTRATION_FESS ERC20-Token-Accepting
@@ -537,7 +552,7 @@ const Dashboard = () => {
             <div className="card-body">
               <h6>Direct Income</h6>
               <h4 className="mb-0">
-                {current_tokenAccepting ? registration_Free / 4 : 0} (USDT)
+                {current_tokenAccepting ? registration_Free / 10 + 5 : 0} (USDT)
               </h4>
             </div>
           </div>
@@ -598,6 +613,15 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
+
+        <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
+          <div className="card">
+            <div className="card-body">
+              <h6>Token Price</h6>
+              <h4 className="mb-0">{tokenPrice ? tokenPrice : 0} (USDT)</h4>
+            </div>
+          </div>
+        </div>
         {/* stage income */}
         <div
           className="col-lg-3 col-md-6 col-sm-12 grid-margin"
@@ -631,7 +655,7 @@ const Dashboard = () => {
               <div className="card-body">
                 <h6>Stage Income</h6>
                 <h2 className="mb-0">
-                  {levelPrice ? levelPrice * 2 : 0} (USDT)
+                  {levelPrice ? levelPrice * 5 : 0} (USDT)
                 </h2>
               </div>
             </div>
@@ -691,14 +715,14 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Token Price  */}
-            {/* <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
-          <div className="card">
-            <div className="card-body">
-              <h6>Token Price</h6>
-              <h4 className="mb-0">{tokenPrice ? tokenPrice : 0} (USDT)</h4>
+            <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
+              <div className="card">
+                <div className="card-body">
+                  <h6>Token Price</h6>
+                  <h4 className="mb-0">{tokenPrice ? tokenPrice : 0} (USDT)</h4>
+                </div>
+              </div>
             </div>
-          </div>
-        </div> */}
             {/* Pay Received  */}
             <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
               <div className="card">
@@ -781,10 +805,30 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+            <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
+              <div className="card">
+                <div className="card-body">
+                  <h6>Pay Reciever</h6>
+                  <h4 className="mb-0">
+                    {udAutopoolPayReciever ? udAutopoolPayReciever : 0}
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            {/* Missed Income  */}
+            <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
+              <div className="card">
+                <div className="card-body">
+                  <h6>Income Missed</h6>
+                  <h4 className="mb-0">{incomeMissed ? incomeMissed : 0}</h4>
+                </div>
+              </div>
+            </div>
             {exSubAdmin ? (
               <>
                 <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
-                  <div className="card">
+                  <div className="card-sp">
                     <div className="card-body">
                       <h6>Stage Income</h6>
                       <h4 className="mb-0">
@@ -794,7 +838,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
-                  <div className="card">
+                  <div className="card-sp">
                     <div className="card-body">
                       <h6>CoReferre</h6>
                       <h4 className="mb-0">
@@ -808,16 +852,6 @@ const Dashboard = () => {
               ""
             )}
             {/* pay reciver  */}
-            <div className="col-lg-3 col-md-6 col-sm-12 grid-margin">
-              <div className="card">
-                <div className="card-body">
-                  <h6>Pay Reciever</h6>
-                  <h4 className="mb-0">
-                    {udAutopoolPayReciever ? udAutopoolPayReciever : 0}
-                  </h4>
-                </div>
-              </div>
-            </div>
           </div>
           <SponserIncome account={account} web3={web3} className="" />
           <LevelIncome account={account} web3={web3} className="" />
@@ -831,7 +865,7 @@ const Dashboard = () => {
       )}
 
       {/* Registration section  */}
-      {isExist ? (
+      {isExist || exSubAdmin ? (
         ""
       ) : (
         <>
@@ -943,7 +977,7 @@ const Dashboard = () => {
           <div> </div>
         </>
       )}
-      {!exSubAdmin || partnerId == 0 ? (
+      {!exSubAdmin || partnerId != 0 ? (
         ""
       ) : (
         <>
@@ -965,16 +999,6 @@ const Dashboard = () => {
                         onSubmit={handleSubmitPayPartner}
                       >
                         <div className="form-group w-100">
-                          <input
-                            className="form-control mt-2"
-                            type="string"
-                            required
-                            name="identify"
-                            onChange={handleChangeAmount}
-                            value={amount}
-                            placeholder="Amount Fee"
-                          />
-
                           <input
                             className="btn btn-primary mt-3"
                             type="submit"
