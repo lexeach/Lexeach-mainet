@@ -853,12 +853,12 @@ const Dashboard = () => {
             )}
             {/* pay reciver  */}
           </div>
-          <SponserIncome account={account} web3={web3} className="" />
+          {/* <SponserIncome account={account} web3={web3} className="" />
           <LevelIncome account={account} web3={web3} className="" />
           <AutoPoolIncome account={account} web3={web3} className="" />
           <StageIncome account={account} web3={web3} className="" />
           <LuckyDrawWin account={account} web3={web3} className="" />
-          <SendBalance account={account} web3={web3} className="" />
+          <SendBalance account={account} web3={web3} className="" /> */}
         </>
       ) : (
         ""
