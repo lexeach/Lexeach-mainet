@@ -1,7 +1,7 @@
 // PolyGon Contract
 module.exports = {
   ICU: {
-    address: "0x4aA381A4e977F2680D3344C7974d40450203081f",
+    address: "0x3375FD179B15b637076549ac04606078ed9b6DeE",
     ABI: [
       {
         inputs: [
@@ -14,6 +14,11 @@ module.exports = {
           {
             internalType: "address payable",
             name: "_swapAddress",
+            type: "address",
+          },
+          {
+            internalType: "address payable",
+            name: "_taxAddress",
             type: "address",
           },
           {
@@ -346,6 +351,20 @@ module.exports = {
         type: "function",
       },
       {
+        inputs: [{ internalType: "address", name: "", type: "address" }],
+        name: "TOP",
+        outputs: [{ internalType: "bool", name: "", type: "bool" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "address", name: "", type: "address" }],
+        name: "approveCoreMem",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
         inputs: [],
         name: "beforeTime",
         outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -461,6 +480,13 @@ module.exports = {
       },
       {
         inputs: [],
+        name: "isTopApproving",
+        outputs: [{ internalType: "bool", name: "", type: "bool" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [],
         name: "isUnfreezing",
         outputs: [{ internalType: "bool", name: "", type: "bool" }],
         stateMutability: "view",
@@ -488,6 +514,13 @@ module.exports = {
         type: "function",
       },
       {
+        inputs: [{ internalType: "address", name: "", type: "address" }],
+        name: "partnerCount",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
+        type: "function",
+      },
+      {
         inputs: [],
         name: "partnerFee",
         outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
@@ -511,6 +544,15 @@ module.exports = {
       {
         inputs: [{ internalType: "uint256", name: "_amount", type: "uint256" }],
         name: "payPartnerFee",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "address", name: "_coreMem", type: "address" },
+        ],
+        name: "regCoreMemSp",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
@@ -546,6 +588,15 @@ module.exports = {
       {
         inputs: [],
         name: "setBeforeTime",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "address", name: "_coreMem", type: "address" },
+        ],
+        name: "setCoreMem",
         outputs: [],
         stateMutability: "nonpayable",
         type: "function",
@@ -633,6 +684,29 @@ module.exports = {
         type: "function",
       },
       {
+        inputs: [
+          { internalType: "address payable", name: "_newTax", type: "address" },
+        ],
+        name: "setTaxAddress",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "uint256", name: "rate", type: "uint256" }],
+        name: "setTaxRate",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [{ internalType: "bool", name: "_status", type: "bool" }],
+        name: "setTopApproving",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
         inputs: [{ internalType: "bool", name: "_status", type: "bool" }],
         name: "setUnfreezingStutus",
         outputs: [],
@@ -660,6 +734,13 @@ module.exports = {
         name: "takeClaim",
         outputs: [],
         stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "taxRate",
+        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+        stateMutability: "view",
         type: "function",
       },
       {
@@ -695,6 +776,24 @@ module.exports = {
         name: "total_rbcd",
         outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
         stateMutability: "view",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "address", name: "_newPartner", type: "address" },
+        ],
+        name: "transferPartnership",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [
+          { internalType: "address", name: "_newPartner", type: "address" },
+        ],
+        name: "transferPartnershipByAdmin",
+        outputs: [],
+        stateMutability: "nonpayable",
         type: "function",
       },
       {
@@ -1415,7 +1514,7 @@ module.exports = {
     ],
   },
   EXAM: {
-    address: "0xcC1D081bB596345167E0b3E7b792F28f1751dd5C",
+    address: "0x75221506b9fc53fddf3e516017926cba6b5b3fd6",
     ABI: [
       { inputs: [], stateMutability: "nonpayable", type: "constructor" },
       {
@@ -1513,15 +1612,6 @@ module.exports = {
         inputs: [
           { internalType: "address", name: "_student", type: "address" },
         ],
-        name: "isQualified",
-        outputs: [{ internalType: "bool", name: "", type: "bool" }],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [
-          { internalType: "address", name: "_student", type: "address" },
-        ],
         name: "lastAttempt",
         outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
         stateMutability: "view",
@@ -1540,13 +1630,6 @@ module.exports = {
         inputs: [],
         name: "owner",
         outputs: [{ internalType: "address", name: "", type: "address" }],
-        stateMutability: "view",
-        type: "function",
-      },
-      {
-        inputs: [],
-        name: "partnerFee",
-        outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
         stateMutability: "view",
         type: "function",
       },
@@ -1619,7 +1702,6 @@ module.exports = {
           { internalType: "uint256", name: "lastAttain", type: "uint256" },
           { internalType: "uint256", name: "totalMarks", type: "uint256" },
           { internalType: "string", name: "status", type: "string" },
-          { internalType: "uint256", name: "paidFee", type: "uint256" },
           { internalType: "uint256", name: "percentage", type: "uint256" },
           { internalType: "uint256", name: "attempts", type: "uint256" },
         ],
